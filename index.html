@@ -398,7 +398,7 @@ var LAB_DEFAULTS = [
     { parameter: 'Creatinine',       unit: 'mg/dL',  ref: '0.5–0.9',   baseline: '—',     target: '0.5–0.9', status: 'green',  category: 'other' },
     { parameter: 'Uric Acid',        unit: 'mg/dL',  ref: '2.5–6',     baseline: '—',     target: '<5.5',    status: 'green',  category: 'other' },
     { parameter: 'SGPT (ALT)',       unit: 'U/L',    ref: '10–35',     baseline: '—',     target: '<35',     status: 'yellow', category: 'other' },
-    { parameter: 'Weight',           unit: 'kg',     ref: '—',         baseline: '70',    target: '63',      status: 'yellow', category: 'other' },
+    { parameter: 'Weight',           unit: 'kg',     ref: '—',         baseline: '70',    target: '65',      status: 'yellow', category: 'other' },
     { parameter: 'BMI',              unit: 'kg/m²',  ref: '18.5–22.9', baseline: '~26',   target: '<24',     status: 'yellow', category: 'other' },
 ];
 
@@ -980,7 +980,7 @@ function renderOutcomes() {
         var latest=Number(allEntries[allEntries.length-1].weightKg);
         var first=Number(allEntries[0].weightKg);
         var change=latest-first;
-        weightHtml='<div class="card"><div class="card-title">⚖️ Weight Progress</div><div class="weight-summary"><div><div class="weight-stat-label">Start</div><div class="weight-stat-value">'+first.toFixed(1)+' kg</div></div><div><div class="weight-stat-label">Current</div><div class="weight-stat-value">'+latest.toFixed(1)+' kg</div></div><div><div class="weight-stat-label">Change</div><div class="weight-stat-value" style="color:'+(change<0?'var(--green)':'var(--red)')+'">'+(change>0?'+':'')+change.toFixed(1)+' kg</div></div><div><div class="weight-stat-label">Target</div><div class="weight-stat-value" style="color:var(--green)">63 kg</div></div></div></div>';
+        weightHtml='<div class="card"><div class="card-title">⚖️ Weight Progress</div><div class="weight-summary"><div><div class="weight-stat-label">Start</div><div class="weight-stat-value">'+first.toFixed(1)+' kg</div></div><div><div class="weight-stat-label">Current</div><div class="weight-stat-value">'+latest.toFixed(1)+' kg</div></div><div><div class="weight-stat-label">Change</div><div class="weight-stat-value" style="color:'+(change<0?'var(--green)':'var(--red)')+'">'+(change>0?'+':'')+change.toFixed(1)+' kg</div></div><div><div class="weight-stat-label">Target</div><div class="weight-stat-value" style="color:var(--green)">65 kg</div></div></div></div>';
     }
 
     var labCards=filtered.map(function(l){
@@ -1017,8 +1017,9 @@ function renderOutcomes() {
         '<div class="milestone-row"><span class="milestone-icon">✅</span><div><div class="milestone-title">Full Panel Done — May 2026</div><div class="milestone-detail">Ferritin 21.5 (low) · Vit D 19 (insufficient) · B12 308 · CRP 4.35</div></div></div>'+
         '<div class="milestone-row"><span class="milestone-icon">⚠️</span><div><div class="milestone-title">Focus: Iron + Vitamin D — Low</div><div class="milestone-detail">Ferritin 21.5 ng/mL (target 50–100) · Vit D 19 ng/mL (target 40–60)</div></div></div>'+
         '<div class="milestone-row"><span class="milestone-icon">⚠️</span><div><div class="milestone-title">HDL Dropped: 62 → 47 mg/dL</div><div class="milestone-detail">Needs attention — exercise + healthy fats</div></div></div>'+
-        '<div class="milestone-row"><span class="milestone-icon">🏋️</span><div><div class="milestone-title">Weight: 67 kg — 3-Month Target</div><div class="milestone-detail">June 2026</div></div></div>'+
-        '<div class="milestone-row"><span class="milestone-icon">🎯</span><div><div class="milestone-title">Weight: 63 kg — 6-Month Target</div><div class="milestone-detail">September 2026</div></div></div>'+
+        '<div class="milestone-row"><span class="milestone-icon">🏋️</span><div><div class="milestone-title">Weight: 69 kg — Jun 30, 2026</div><div class="milestone-detail">3-Month Target</div></div></div>'+
+        '<div class="milestone-row"><span class="milestone-icon">🎯</span><div><div class="milestone-title">Weight: 67 kg — Sep 30, 2026</div><div class="milestone-detail">6-Month Target</div></div></div>'+
+        '<div class="milestone-row"><span class="milestone-icon">🏆</span><div><div class="milestone-title">Weight: 65 kg — Dec 31, 2026</div><div class="milestone-detail">9-Month Target</div></div></div>'+
         '<div class="milestone-row"><span class="milestone-icon">🩸</span><div><div class="milestone-title">HbA1c Recheck</div><div class="milestone-detail">Target <5.7% (September 2026)</div></div></div></div>';
 }
 
@@ -1252,7 +1253,7 @@ function generateInsightsText(detailed) {
             text += 'Latest: ' + latestW.weightKg + ' kg (' + latestW.date + ')\n';
             text += 'First: ' + firstW.weightKg + ' kg (' + firstW.date + ')\n';
             text += 'Change: ' + (latestW.weightKg - firstW.weightKg).toFixed(1) + ' kg\n';
-            text += 'Target: 63 kg\n';
+            text += 'Target: 65 kg\n';
         }
 
         var labs = DB.getLabs();
