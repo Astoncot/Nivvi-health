@@ -376,24 +376,56 @@ var LOCATIONS = {
 };
 
 var LAB_DEFAULTS = [
-    { parameter: 'HbA1c',           unit: '%',      ref: '<5.7',      baseline: '6.2',   target: '<5.7',    status: 'red',    category: 'metabolic' },
+    { parameter: 'HbA1c',           unit: '%',      ref: '<5.7',      baseline: '6.2',   target: '<5.7',    status: 'yellow', category: 'metabolic' },
     { parameter: 'Fasting Glucose',  unit: 'mg/dL',  ref: '70–100',    baseline: '91',    target: '<90',     status: 'yellow', category: 'metabolic' },
+    { parameter: 'PP Glucose',       unit: 'mg/dL',  ref: '<140',      baseline: '—',     target: '<120',    status: 'green',  category: 'metabolic' },
     { parameter: 'eAG',              unit: 'mg/dL',  ref: '—',         baseline: '131',   target: '<115',    status: 'yellow', category: 'metabolic' },
+    { parameter: 'Fasting Insulin',  unit: 'µIU/mL', ref: '1.9–23',    baseline: '—',     target: '<10',     status: 'green',  category: 'metabolic' },
+    { parameter: 'HOMA-IR',          unit: '',        ref: '<1.69',     baseline: '—',     target: '<1.5',    status: 'green',  category: 'metabolic' },
     { parameter: 'Haemoglobin',      unit: 'g/dL',   ref: '12–15',     baseline: '12.1',  target: '>13',     status: 'yellow', category: 'hematology' },
     { parameter: 'ESR',              unit: 'mm/hr',  ref: '≤20',       baseline: '39',    target: '≤20',     status: 'red',    category: 'hematology' },
     { parameter: 'MCV',              unit: 'fL',     ref: '83–101',    baseline: '82.2',  target: '>83',     status: 'yellow', category: 'hematology' },
-    { parameter: 'Ferritin',         unit: 'ng/mL',  ref: '13–150',    baseline: '—',     target: '50–100',  status: 'yellow', category: 'hematology' },
+    { parameter: 'Ferritin',         unit: 'ng/mL',  ref: '13–150',    baseline: '—',     target: '50–100',  status: 'red',    category: 'hematology' },
+    { parameter: 'RBC Count',        unit: 'M/cu.mm',ref: '3.8–4.8',   baseline: '—',     target: '4.0–4.8', status: 'green',  category: 'hematology' },
     { parameter: 'Total Cholesterol',unit: 'mg/dL',  ref: '<200',      baseline: '169',   target: '<200',    status: 'green',  category: 'lipids' },
     { parameter: 'LDL',              unit: 'mg/dL',  ref: '<100',      baseline: '91.3',  target: '<100',    status: 'green',  category: 'lipids' },
-    { parameter: 'HDL',              unit: 'mg/dL',  ref: '>60',       baseline: '62',    target: '>60',     status: 'green',  category: 'lipids' },
+    { parameter: 'HDL',              unit: 'mg/dL',  ref: '≥40',       baseline: '62',    target: '>50',     status: 'yellow', category: 'lipids' },
     { parameter: 'Triglycerides',    unit: 'mg/dL',  ref: '<150',      baseline: '80',    target: '<100',    status: 'green',  category: 'lipids' },
-    { parameter: 'TSH',              unit: 'µIU/mL', ref: '0.38–5.33', baseline: '2.93',  target: '1.0–3.0', status: 'green',  category: 'lipids' },
+    { parameter: 'TSH',              unit: 'µIU/mL', ref: '0.27–4.20', baseline: '2.93',  target: '1.0–3.0', status: 'green',  category: 'other' },
+    { parameter: 'Vitamin D',        unit: 'ng/mL',  ref: '30–100',    baseline: '—',     target: '40–60',   status: 'red',    category: 'other' },
+    { parameter: 'Vitamin B12',      unit: 'pg/mL',  ref: '197–771',   baseline: '—',     target: '>400',    status: 'yellow', category: 'other' },
+    { parameter: 'hs-CRP',           unit: 'mg/L',   ref: '0–5',       baseline: '—',     target: '<3',      status: 'yellow', category: 'other' },
+    { parameter: 'Creatinine',       unit: 'mg/dL',  ref: '0.5–0.9',   baseline: '—',     target: '0.5–0.9', status: 'green',  category: 'other' },
+    { parameter: 'Uric Acid',        unit: 'mg/dL',  ref: '2.5–6',     baseline: '—',     target: '<5.5',    status: 'green',  category: 'other' },
+    { parameter: 'SGPT (ALT)',       unit: 'U/L',    ref: '10–35',     baseline: '—',     target: '<35',     status: 'yellow', category: 'other' },
     { parameter: 'Weight',           unit: 'kg',     ref: '—',         baseline: '70',    target: '63',      status: 'yellow', category: 'other' },
     { parameter: 'BMI',              unit: 'kg/m²',  ref: '18.5–22.9', baseline: '~26',   target: '<24',     status: 'yellow', category: 'other' },
-    { parameter: 'Vitamin D',        unit: 'ng/mL',  ref: '30–100',    baseline: '—',     target: '40–60',   status: 'yellow', category: 'other' },
-    { parameter: 'Vitamin B12',      unit: 'pg/mL',  ref: '211–946',   baseline: '—',     target: '>400',    status: 'yellow', category: 'other' },
-    { parameter: 'hs-CRP',           unit: 'mg/L',   ref: '<1.0',      baseline: '—',     target: '<1.0',    status: 'yellow', category: 'other' },
 ];
+
+// May 2026 Apollo report results (15-May-2026)
+var MAY2026_RESULTS = {
+    'HbA1c':           { value: '5.9',   date: '2026-05-15' },
+    'Fasting Glucose':  { value: '97',    date: '2026-05-15' },
+    'PP Glucose':       { value: '118',   date: '2026-05-15' },
+    'eAG':              { value: '123',   date: '2026-05-15' },
+    'Fasting Insulin':  { value: '9.79',  date: '2026-05-15' },
+    'HOMA-IR':          { value: '1.29',  date: '2026-05-15' },
+    'Haemoglobin':      { value: '12.0',  date: '2026-05-15' },
+    'MCV':              { value: '82.5',  date: '2026-05-15' },
+    'Ferritin':         { value: '21.5',  date: '2026-05-15' },
+    'RBC Count':        { value: '4.44',  date: '2026-05-15' },
+    'Total Cholesterol':{ value: '142',   date: '2026-05-15' },
+    'LDL':              { value: '80.7',  date: '2026-05-15' },
+    'HDL':              { value: '47',    date: '2026-05-15' },
+    'Triglycerides':    { value: '71',    date: '2026-05-15' },
+    'TSH':              { value: '2.20',  date: '2026-05-15' },
+    'Vitamin D':        { value: '19',    date: '2026-05-15' },
+    'Vitamin B12':      { value: '308',   date: '2026-05-15' },
+    'hs-CRP':           { value: '4.35',  date: '2026-05-15' },
+    'Creatinine':       { value: '0.60',  date: '2026-05-15' },
+    'Uric Acid':        { value: '5.32',  date: '2026-05-15' },
+    'SGPT (ALT)':       { value: '36.9',  date: '2026-05-15' },
+};
 
 // ====== PREDEFINED TIME OPTIONS ======
 var BEDTIME_OPTIONS = [];
@@ -910,7 +942,34 @@ function saveAddEntry() {
 // ====== OUTCOMES ======
 function renderOutcomes() {
     var labs=DB.getLabs();
-    if(!labs){labs=LAB_DEFAULTS.map(function(l){return Object.assign({},l,{current:null,currentDate:null});});DB.saveLabs(labs);}
+    if(!labs){
+        labs=LAB_DEFAULTS.map(function(l){
+            var r=MAY2026_RESULTS[l.parameter];
+            return Object.assign({},l,{current:r?r.value:null,currentDate:r?r.date:null});
+        });
+        DB.saveLabs(labs);
+    } else {
+        // Merge any new parameters from LAB_DEFAULTS + apply May 2026 results if not already set
+        var changed=false;
+        LAB_DEFAULTS.forEach(function(d){
+            var existing=labs.find(function(l){return l.parameter===d.parameter;});
+            if(!existing){
+                var r=MAY2026_RESULTS[d.parameter];
+                labs.push(Object.assign({},d,{current:r?r.value:null,currentDate:r?r.date:null}));
+                changed=true;
+            } else if(!existing.current && MAY2026_RESULTS[existing.parameter]){
+                var r=MAY2026_RESULTS[existing.parameter];
+                existing.current=r.value;
+                existing.currentDate=r.date;
+                existing.status=d.status;
+                changed=true;
+            }
+        });
+        // Remove parameters no longer in LAB_DEFAULTS
+        var defaultParams=LAB_DEFAULTS.map(function(d){return d.parameter;});
+        labs=labs.filter(function(l){return defaultParams.indexOf(l.parameter)>=0;});
+        if(changed) DB.saveLabs(labs);
+    }
 
     var filtered=labs.filter(function(l){return l.category===selectedLabCat;});
     var statusColors={red:'var(--red)',yellow:'var(--yellow)',green:'var(--green)'};
@@ -947,12 +1006,20 @@ function renderOutcomes() {
     }).join('');
 
     return '<div class="page-header"><h1>Outcomes</h1></div>'+
-        '<div class="baseline-banner"><span class="baseline-icon">📅</span><div><div class="baseline-title">Baseline: 30 Aug 2025 · Apollo, BLR</div><div class="baseline-sub">3-Month: Jun 2026 · 6-Month: Sep 2026</div></div></div>'+
+        '<div class="baseline-banner"><span class="baseline-icon">📅</span><div><div class="baseline-title">Baseline: 30 Aug 2025 · Apollo, BLR</div><div class="baseline-sub">Latest: 15 May 2026 · Apollo, BLR | Next: Sep 2026</div></div></div>'+
         weightHtml+
         '<div class="cat-picker">'+catPickerHtml+'</div>'+
         labCards+
         flaggedHtml+
-        '<div class="card"><div class="card-title">🏁 Milestones</div><div class="milestone-row"><span class="milestone-icon">🚨</span><div><div class="milestone-title">Physician + GI Consult — URGENT</div><div class="milestone-detail">HbA1c 6.2% + ESR 39</div></div></div><div class="milestone-row"><span class="milestone-icon">🔬</span><div><div class="milestone-title">Iron & Hormone Panel</div><div class="milestone-detail">Ferritin · FSH/LH · Vit D · B12 · hs-CRP</div></div></div><div class="milestone-row"><span class="milestone-icon">🏋️</span><div><div class="milestone-title">Weight: 67 kg — 3-Month Target</div><div class="milestone-detail">June 2026</div></div></div><div class="milestone-row"><span class="milestone-icon">🎯</span><div><div class="milestone-title">Weight: 63 kg — 6-Month Target</div><div class="milestone-detail">September 2026</div></div></div><div class="milestone-row"><span class="milestone-icon">🩸</span><div><div class="milestone-title">HbA1c Recheck</div><div class="milestone-detail">Target <5.7% (September 2026)</div></div></div></div>';
+        '<div class="card"><div class="card-title">🏁 Milestones</div>'+
+        '<div class="milestone-row"><span class="milestone-icon">✅</span><div><div class="milestone-title">GI Consult — Done (May 2026)</div><div class="milestone-detail">D2 biopsy: mild duodenitis, no celiac/giardiasis</div></div></div>'+
+        '<div class="milestone-row"><span class="milestone-icon">✅</span><div><div class="milestone-title">HbA1c: 6.2% → 5.9% (Prediabetes range)</div><div class="milestone-detail">Improved! Target <5.7% by Sep 2026</div></div></div>'+
+        '<div class="milestone-row"><span class="milestone-icon">✅</span><div><div class="milestone-title">Full Panel Done — May 2026</div><div class="milestone-detail">Ferritin 21.5 (low) · Vit D 19 (insufficient) · B12 308 · CRP 4.35</div></div></div>'+
+        '<div class="milestone-row"><span class="milestone-icon">⚠️</span><div><div class="milestone-title">Focus: Iron + Vitamin D — Low</div><div class="milestone-detail">Ferritin 21.5 ng/mL (target 50–100) · Vit D 19 ng/mL (target 40–60)</div></div></div>'+
+        '<div class="milestone-row"><span class="milestone-icon">⚠️</span><div><div class="milestone-title">HDL Dropped: 62 → 47 mg/dL</div><div class="milestone-detail">Needs attention — exercise + healthy fats</div></div></div>'+
+        '<div class="milestone-row"><span class="milestone-icon">🏋️</span><div><div class="milestone-title">Weight: 67 kg — 3-Month Target</div><div class="milestone-detail">June 2026</div></div></div>'+
+        '<div class="milestone-row"><span class="milestone-icon">🎯</span><div><div class="milestone-title">Weight: 63 kg — 6-Month Target</div><div class="milestone-detail">September 2026</div></div></div>'+
+        '<div class="milestone-row"><span class="milestone-icon">🩸</span><div><div class="milestone-title">HbA1c Recheck</div><div class="milestone-detail">Target <5.7% (September 2026)</div></div></div></div>';
 }
 
 function setLabCat(c){selectedLabCat=c;render();}
